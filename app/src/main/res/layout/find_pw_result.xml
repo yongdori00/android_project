@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham"
+            android:text="보드러운 설명서 "
+            android:textColor="@color/black"
+            android:textSize="36dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/button_search"
+        android:layout_gravity="center_horizontal"
+        android:drawableStart="@drawable/baseline_help_outline_white_24dp"
+        android:background="@color/black"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:drawableLeft="@drawable/baseline_help_outline_white_24dp" />
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/baseline_search_white_24dp"
+
+        />
+
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gridlayout"
+        android:layout_alignLeft="@id/gridlayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="33dp"
+
+        android:text="비밀번호 찾기"
+        android:textSize="24dp">
+
+    </TextView>
+
+    <GridLayout
+        android:id="@+id/gridlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="50dp">
+
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textSize="20sp"
+            >
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text9"
+            android:text="홍길동"
+            android:textSize="20sp"
+            android:paddingLeft="20sp"
+
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text5"
+            android:text="전화번호"
+            android:textSize="20sp"
+            android:paddingTop="10dp">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text10"
+            android:text="010-1234-5678"
+            android:textSize="20sp"
+            android:paddingLeft="20sp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text8"
+            android:text="아이디"
+            android:textSize="20sp"
+            android:paddingTop="10dp">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text11"
+            android:text="asdf1234@naver.com"
+            android:textSize="20sp"
+            android:paddingLeft="20sp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text12"
+            android:text="비밀번호"
+            android:textSize="20sp"
+            android:paddingTop="10dp">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text13"
+            android:text="qwer1234!"
+            android:textSize="20sp"
+            android:paddingLeft="20sp"
+            >
+        </TextView>
+
+
+
+    </GridLayout>
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gridlayout"
+        android:layout_marginLeft="150dp"
+        android:background="@color/gray"
+        android:text="로그인"
+        >
+
+    </Button>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomNavi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="#000"
+        app:itemTextColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_bottom" />
+
+
+
+</RelativeLayout>

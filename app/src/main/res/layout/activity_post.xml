@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reLay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity_Community.Writing_Board">
+
+    <LinearLayout
+        android:id="@+id/topLay"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/go_back"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:onClick="Back_click"
+            tools:src="@drawable/abc_vector_test" />
+
+        <TextView
+            android:id="@+id/Post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:lines="2"
+            android:text="제목"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <CheckBox
+            android:id="@+id/top_check"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:text="top"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topLay"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/midLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/topLay"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/Post_sentence"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:text="본문" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image1"
+                        android:visibility="gone"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image2"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image3"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image4"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image5"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image6"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image7"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image8"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image9"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/image10"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/bottom_lay"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <EditText
+                android:id="@+id/comment_text"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:hint="댓글 작성" />
+
+            <CheckBox
+                android:id="@+id/comment_check"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="게시자만 표시" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="commentOnClick"
+                android:text="댓글 작성" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

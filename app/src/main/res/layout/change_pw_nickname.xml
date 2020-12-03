@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham"
+            android:text="보드러운 설명서 "
+            android:textColor="@color/black"
+            android:textSize="36dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/button_search"
+        android:layout_gravity="center_horizontal"
+        android:drawableStart="@drawable/baseline_help_outline_black_24dp"
+        android:background="@color/white"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:drawableLeft="@drawable/baseline_help_outline_black_24dp" />
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/baseline_search_black_24dp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/text123"
+        android:textSize="20sp"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="개인정보수정">
+    </TextView>
+
+    <GridLayout
+        android:id="@+id/gridlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/shape3"
+        android:layout_marginLeft="30dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:id="@+id/text1"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:background="@drawable/shape2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="아이디">
+        </TextView>
+
+        <TextView
+            android:layout_width="230dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:id="@+id/email_nonchange"
+            android:background="@drawable/shape">
+        </TextView>
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:id="@+id/text2"
+            android:textColor="@color/black"
+            android:background="@drawable/shape2"
+            android:padding="15dp"
+            android:text="별명" >
+        </TextView>
+
+
+        <LinearLayout
+            android:layout_width="230dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape"
+            >
+            <EditText
+                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:background="@drawable/edit_round"
+                android:id="@+id/nickname_change"
+                android:hint="변경할 별명 입력"
+                android:layout_marginLeft="10dp"
+                android:textColorHint="@color/black">
+            </EditText>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/shape2"
+            android:padding="15dp"
+            android:id="@+id/text3"
+            android:text="이름">
+        </TextView>
+
+
+        <TextView
+            android:layout_width="230dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/shape"
+            android:padding="15dp"
+            android:id="@+id/name_nonchange">
+        </TextView>
+
+        <TextView
+            android:layout_width="120dp"
+            android:textColor="@color/black"
+            android:layout_height="100dp"
+            android:textSize="20sp"
+            android:background="@drawable/shape2"
+            android:padding="15dp"
+            android:id="@+id/text7"
+            android:text="  변경할  비밀번호">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="230dp"
+            android:layout_height="100dp"
+            android:background="@drawable/shape"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:inputType="textPassword"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
+                android:background="@drawable/edit_round"
+                android:textSize="18sp"
+                android:id="@+id/password_change"
+                android:hint="변경할 비밀번호 입력"
+                android:textColorHint="@color/black">
+            </EditText>
+
+            <EditText
+                android:inputType="textPassword"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
+                android:background="@drawable/edit_round"
+                android:textSize="18sp"
+                android:id="@+id/password_change2"
+                android:hint="변경할 비밀번호 입력"
+                android:textColorHint="@color/black">
+            </EditText>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="120dp"
+            android:textColor="@color/black"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:background="@drawable/shape2"
+            android:padding="15dp"
+            android:id="@+id/text5"
+            android:text="전화번호">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="230dp"
+            android:layout_height="60dp"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/shape"
+            android:id="@+id/phone_nonchange">
+        </TextView>
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/changer"
+        android:layout_marginTop="40dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gridlayout"
+        android:layout_marginLeft="120dp"
+        android:background="@color/gray"
+        android:text="별명 및 패스워드 변경"
+        >
+
+    </Button>
+</RelativeLayout>

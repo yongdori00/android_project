@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham"
+            android:text="보드러운 설명서 "
+            android:textColor="@color/black"
+            android:textSize="36dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/button_search"
+        android:layout_gravity="center_horizontal"
+        android:drawableStart="@drawable/baseline_help_outline_white_24dp"
+        android:background="@color/black"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:drawableLeft="@drawable/baseline_help_outline_white_24dp" />
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/baseline_search_white_24dp"
+
+        />
+
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gridlayout"
+        android:layout_alignLeft="@id/gridlayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="34dp"
+
+        android:text="비밀번호 찾기"
+        android:textSize="24dp">
+
+    </TextView>
+
+    <GridLayout
+        android:id="@+id/gridlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="50dp">
+
+
+        <TextView
+            android:id="@+id/text7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일"></TextView>
+
+        <EditText
+            android:id="@+id/find_pw_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="250dp"
+            android:hint="아이디를 입력해주세요.">
+
+        </EditText>
+
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/find_pw_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gridlayout"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/gray"
+        android:text="확인">
+
+    </Button>
+</RelativeLayout>

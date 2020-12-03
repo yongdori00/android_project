@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="date">
+        <item>1일</item>
+        <item>1주일</item>
+        <item>1달</item>
+        <item>6개월</item>
+    </string-array>
+
+    <string-array name="show">
+        <item>좋아요</item>
+        <item>조회수</item>
+        <item>최신순</item>
+    </string-array>
+</resources>
