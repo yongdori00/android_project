@@ -171,6 +171,7 @@ public class FragmentCommunity extends Fragment{
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), Community_Board.class);
+                intent.putExtra("wrotebyme", "wrotebyme");
                 startActivity(intent);
             }
         });

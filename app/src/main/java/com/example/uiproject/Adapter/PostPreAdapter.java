@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uiproject.Activity_Community.Community_Board;
+import com.example.uiproject.CommunityHelper.board_list;
 import com.example.uiproject.R;
 
 import org.w3c.dom.Text;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class PostPreAdapter extends RecyclerView.Adapter<PostPreAdapter.ViewHolder> {
 
-    private ArrayList<String> mData = null ;
+    private ArrayList<board_list> mData = null ;
     private ArrayList<Integer> ilist = null;
     private ArrayList<Boolean> blist = null;
 
@@ -62,9 +63,8 @@ public class PostPreAdapter extends RecyclerView.Adapter<PostPreAdapter.ViewHold
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public PostPreAdapter(ArrayList<String> list, ArrayList<Integer>Ilist) {
+    public PostPreAdapter(ArrayList<board_list> list) {
         mData = list ;
-        ilist = Ilist;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
@@ -82,10 +82,11 @@ public class PostPreAdapter extends RecyclerView.Adapter<PostPreAdapter.ViewHold
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(PostPreAdapter.ViewHolder holder, int position) {
-        String text = mData.get(position) ;
-        int number = ilist.get(position);
-        holder.textView1.setText(text) ;
-        holder.textView2.setText(Integer.toString(number));
+        board_list board = mData.get(position) ;
+        String str = board.game;
+        int num = board.num;
+        holder.textView1.setText(str) ;
+        holder.textView2.setText(Integer.toString(num));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

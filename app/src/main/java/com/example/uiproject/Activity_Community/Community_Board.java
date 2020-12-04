@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uiproject.Adapter.PostPreAdapter;
+import com.example.uiproject.CommunityHelper.board_list;
 import com.example.uiproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +41,8 @@ import com.google.firebase.firestore.SetOptions;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +54,7 @@ public class Community_Board extends AppCompatActivity {
     CheckBox favorite;
     RecyclerView board_scroll;
     PostPreAdapter PostpreAdapter;
-    public static ArrayList<String> rowsArrayList = new ArrayList<>();
+    public static ArrayList<board_list> rowsArrayList = new ArrayList<>();
     ArrayList<Integer> rowsArrayList1 = new ArrayList<>();
     ArrayList<Boolean> Blist = new ArrayList<>();                   //top기능 보여줄지 말지 위해서 존재
     Spinner dateSpinner;
@@ -62,6 +65,7 @@ public class Community_Board extends AppCompatActivity {
     public static boolean isChecked = false;
 
     String intentTheme, intentName;
+    String wrotebyme;
     String title;
 
     FirebaseAuth FA;
@@ -91,6 +95,11 @@ public class Community_Board extends AppCompatActivity {
         Intent intent = getIntent();
         intentTheme = intent.getExtras().getString(theme);
         intentName = intent.getExtras().getString(name);
+        wrotebyme = intent.getExtras().getString("wrotebyme");
+
+        if(wrotebyme != null && wrotebyme.equals("wrotebyme")){
+
+        }
 
         TextView TV = findViewById(R.id.game_board);
         TV.setText(intentName);
@@ -105,7 +114,7 @@ public class Community_Board extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                PostpreAdapter = new PostPreAdapter(rowsArrayList, rowsArrayList1);
+                PostpreAdapter = new PostPreAdapter(rowsArrayList);
                 board_scroll.setAdapter(PostpreAdapter);
                 PostpreAdapter.setsOnItemClickListener(new PostPreAdapter.OnsItemClickListener() {
                     Intent intent = new Intent(getApplicationContext(), Post.class);
@@ -159,19 +168,25 @@ public class Community_Board extends AppCompatActivity {
         docRef = db.collection("ChatApp").document("Post")
                 .collection(intentTheme).document(intentName);
 
-        /*while (k < 10 && (numberOfGame - i) > 0) {
+        while (k < 10 && (numberOfGame - i) > 0) {
             docRef.collection("list").document((numberOfGame - i) + "").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document != null) {
-                            Map<String, Long> user = new HashMap<>();
                             long num = (long)document.get("num");
                             title = (String) document.get("title");
-                            user.put
+                            board_list board = new board_list((int)num, title);
 
-                            rowsArrayList.add(title);
+                            rowsArrayList.add(board);
+                        }
+                        for(int j = 0; j < rowsArrayList.size() - 1; j++){
+                            for(int f = j; f < rowsArrayList.size(); f++){
+                                if(rowsArrayList.get(j).num > rowsArrayList.get(f).num){
+                                    Collections.swap(rowsArrayList, j, f);
+                                }
+                            }
                         }
                     }
                 }
@@ -180,7 +195,7 @@ public class Community_Board extends AppCompatActivity {
             //파베에서 받은 문자열 넘겨주기
             i++;
             k++;
-        }*/
+        }
     }
 
 
