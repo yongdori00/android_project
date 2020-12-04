@@ -64,8 +64,6 @@ public class Post extends AppCompatActivity {
         gameTheme = intent.getExtras().getString("gametheme");
         gameName = intent.getExtras().getString("gamename");
 
-        to = rowsArrayList.indexOf(title_);
-
         title = findViewById(R.id.Post_title);
         sentence = findViewById(R.id.Post_sentence);
         for (int i = 0; i < 10; i++) {

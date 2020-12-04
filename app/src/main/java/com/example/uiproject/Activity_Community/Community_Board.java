@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uiproject.Adapter.PostPreAdapter;
+import com.example.uiproject.CommunityHelper.board_list;
 import com.example.uiproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +42,8 @@ import com.google.firebase.firestore.SetOptions;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,11 +52,14 @@ public class Community_Board extends AppCompatActivity {
     public static String theme = "theme";
     public static String name = "name";
 
+    SwipeRefreshLayout simple;
     CheckBox favorite;
     RecyclerView board_scroll;
     PostPreAdapter PostpreAdapter;
-    public static ArrayList<String> rowsArrayList = new ArrayList<>();
-    ArrayList<Integer> rowsArrayList1 = new ArrayList<>();
+
+    Context con;
+
+    public static ArrayList<board_list> rowsArrayList = new ArrayList<>();
     ArrayList<Boolean> Blist = new ArrayList<>();                   //top기능 보여줄지 말지 위해서 존재
     Spinner dateSpinner;
     ArrayAdapter dateAdapter;
@@ -62,6 +69,7 @@ public class Community_Board extends AppCompatActivity {
     public static boolean isChecked = false;
 
     String intentTheme, intentName;
+    String wrotebyme;
     String title;
 
     FirebaseAuth FA;
@@ -91,24 +99,73 @@ public class Community_Board extends AppCompatActivity {
         Intent intent = getIntent();
         intentTheme = intent.getExtras().getString(theme);
         intentName = intent.getExtras().getString(name);
+        //wrotebyme = intent.getExtras().getString("wrotebyme");
+
+        //if(wrotebyme != null && wrotebyme.equals("wrotebyme")){
+
+        //}
+
+        con = this;
 
         TextView TV = findViewById(R.id.game_board);
         TV.setText(intentName);
 
         getAccountInfo();
+        i = 0;
         populateDate();
 
+        favorite = findViewById(R.id.favorite_check);
+        favorite.setChecked(checked);
+        favoriteChecked();
+
         board_scroll = findViewById(R.id.board_scroll);
-        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager = new LinearLayoutManager(con);
         board_scroll.setLayoutManager(linearLayoutManager);
-        Handler handler =  new Handler();
+        Initialize_by_game();
+
+        simple = findViewById(R.id.community_swipelayout);
+        Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                PostpreAdapter = new PostPreAdapter(rowsArrayList, rowsArrayList1);
+                simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        getAccountInfo();
+                        populateDate();
+                        Initialize_by_game();
+                        simple.setRefreshing(false);
+                    }
+                });
+            }
+        },1000);
+
+        //boardScroll();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        CheckBox favoriteCheck = findViewById(R.id.favorite_check);
+        editor.putBoolean(FU.getUid() + intentName, favoriteCheck.isChecked());
+
+        editor.commit();
+    }
+
+    private void Initialize_by_game(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PostpreAdapter = new PostPreAdapter(rowsArrayList);
                 board_scroll.setAdapter(PostpreAdapter);
                 PostpreAdapter.setsOnItemClickListener(new PostPreAdapter.OnsItemClickListener() {
                     Intent intent = new Intent(getApplicationContext(), Post.class);
+
                     @Override
                     public void onsItemClick(View v, int pos) {
                         docRef = db.collection("ChatApp").document("Post")
@@ -128,59 +185,47 @@ public class Community_Board extends AppCompatActivity {
                 });
             }
         }, 400);
-
-        favorite = findViewById(R.id.favorite_check);
-        favorite.setChecked(checked);
-        favoriteChecked();
-
-
-
-        //boardScroll();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-
-        CheckBox favoriteCheck = findViewById(R.id.favorite_check);
-        editor.putBoolean(FU.getUid() + intentName, favoriteCheck.isChecked());
-
-        editor.commit();
     }
 
     private void populateDate() {
         rowsArrayList = new ArrayList<>();
-        rowsArrayList1 = new ArrayList<>();
         int k = 0;
 
         docRef = db.collection("ChatApp").document("Post")
                 .collection(intentTheme).document(intentName);
 
-        /*while (k < 10 && (numberOfGame - i) > 0) {
+        while (k < 10 && (numberOfGame - i) > 0) {
             docRef.collection("list").document((numberOfGame - i) + "").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
-                        if (document != null) {
-                            Map<String, Long> user = new HashMap<>();
-                            long num = (long)document.get("num");
-                            title = (String) document.get("title");
-                            user.put
+                        try {
+                            if (document != null) {
+                                long num = (long) document.get("num");
+                                title = (String) document.get("title");
+                                board_list board = new board_list((int) num, title);
 
-                            rowsArrayList.add(title);
+                                rowsArrayList.add(board);
+                            }
+                            for (int j = 0; j < rowsArrayList.size() - 1; j++) {
+                                for (int f = j + 1; f < rowsArrayList.size(); f++) {
+                                    if (rowsArrayList.get(j).num < rowsArrayList.get(f).num) {
+                                        Collections.swap(rowsArrayList, j, f);
+                                    }
+                                }
+                            }
+                        } catch (Exception e){
+
                         }
+
                     }
                 }
             });
-            rowsArrayList1.add((int)numberOfGame - i);
             //파베에서 받은 문자열 넘겨주기
             i++;
             k++;
-        }*/
+        }
     }
 
 
@@ -237,19 +282,20 @@ public class Community_Board extends AppCompatActivity {
         showAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         showSpinner.setAdapter(showAdapter);
     }
-/*
-    public void boardScroll() {
-        board_scroll.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                if (e.getAction() == MotionEvent.ACTION_DOWN) {
-                    View child = rv.findChildViewUnder(e.getX(), e.getY());
 
-                    LinearLayout board_sentence = (LinearLayout) rv.getChildViewHolder(child).itemView.findViewById(R.id.board_sentence);
-                    Intent intent = new Intent(getApplicationContext(), Post.class);
-                    //.putExtra("number", /*여기에 게시글 번호가 들어가야함.*///);
-                    //여기 문장을 통해서 recyclerview를 터치했을 때 새로운 게시글 activity가 열려야한다.
-                    //파이어베이스를 통해서 게시글이 정렬이 될 때 글 번호도 같이 로드 되게 하는게 좋을 듯
+    /*
+        public void boardScroll() {
+            board_scroll.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+                @Override
+                public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                    if (e.getAction() == MotionEvent.ACTION_DOWN) {
+                        View child = rv.findChildViewUnder(e.getX(), e.getY());
+
+                        LinearLayout board_sentence = (LinearLayout) rv.getChildViewHolder(child).itemView.findViewById(R.id.board_sentence);
+                        Intent intent = new Intent(getApplicationContext(), Post.class);
+                        //.putExtra("number", /*여기에 게시글 번호가 들어가야함.*///);
+    //여기 문장을 통해서 recyclerview를 터치했을 때 새로운 게시글 activity가 열려야한다.
+    //파이어베이스를 통해서 게시글이 정렬이 될 때 글 번호도 같이 로드 되게 하는게 좋을 듯
                 /*}
                 return false;
             }
@@ -273,7 +319,7 @@ public class Community_Board extends AppCompatActivity {
             public void onClick(View v) {
                 docRef = db.collection("ChatApp").document("account")
                         .collection("list").document(FU.getUid().trim());
-                if (((CheckBox) v).isChecked() == true) {
+                if (((CheckBox) v).isChecked()) {
                     Map<String, Object> favoriteMap = new HashMap<>();
                     Map<String, Object> game = new HashMap<>();
                     Map<String, Object> theme = new HashMap<>();
@@ -287,7 +333,7 @@ public class Community_Board extends AppCompatActivity {
 
                     docRef.set(favoriteMap, SetOptions.merge());
 
-                } else if (((CheckBox) v).isChecked() == false) {
+                } else if (!((CheckBox) v).isChecked()) {
                     Map<String, Object> favoriteMap = new HashMap<>();
                     Map<String, Object> game = new HashMap<>();
                     Map<String, Object> theme = new HashMap<>();

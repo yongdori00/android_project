@@ -44,6 +44,7 @@ public class gameThemeHelper {
                             Map<String, Object> number = new HashMap<>();
 
                             number.put("numberofpost", 0);
+                            Community_Board.numberOfGame = 0;
                             docRef.set(number, SetOptions.merge());
                         }
                     }

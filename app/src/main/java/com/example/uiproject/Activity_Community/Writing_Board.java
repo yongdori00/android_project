@@ -244,23 +244,14 @@ public class Writing_Board extends AppCompatActivity {
     }
 
     public void putNumaccount(){
-        Map<String, Object> gameNum = new HashMap();
-        gameNum.put("" + accountNum, accountNum);
-        numberOfGame--;
-        String titleS = title.getText().toString();
-        String sentenceS = sentence.getText().toString();
-        Map<String, Object> user = new HashMap<>();
-        user.put("title", titleS);
-        user.put("sentence", sentenceS);
-        user.put("uid", fa.getCurrentUser().getUid());
-        numberOfGame++;
-        Map<String, Object> num = new HashMap<>();
-        num.put("numberofpost", numberOfGame);
-        user.put("num", numberOfGame);
+        Map<String, Object> Game = new HashMap<>();
+        Map<String, Object> Theme = new HashMap<>();
+
+        Game.put(gameName, accountNum);
+        Theme.put(gameTheme, Game);
 
         db.collection("ChatApp").document("account")
-                .collection("list").document(fa.getCurrentUser().getUid().trim())
-                .collection("list").document(""+numberOfGame).set(user, SetOptions.merge());
+                .collection(fa.getCurrentUser().getUid().trim()).document().set(Theme, SetOptions.merge());
 
     }
 }
