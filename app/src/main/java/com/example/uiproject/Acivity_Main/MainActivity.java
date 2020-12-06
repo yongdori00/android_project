@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentCommunity fragcom;
     private FragmentMypage fragpag;
 
+    int page = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -60,16 +62,20 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.home:
-                        setFrag(0);
+                        page = 0;
+                        setFrag(page);
                         break;
                     case R.id.message:
-                        setFrag(1);
+                        page = 1;
+                        setFrag(page);
                         break;
                     case R.id.community:
-                        setFrag(2);
+                        page = 2;
+                        setFrag(page);
                         break;
                     case R.id.mypage:
-                        setFrag(3);
+                        page = 3;
+                        setFrag(page);
                         break;
 
                 }
@@ -82,12 +88,51 @@ public class MainActivity extends AppCompatActivity {
         fragcom=new FragmentCommunity();
         fragpag=new FragmentMypage();
 
-        setFrag(0); // 첫 프래그먼트 화면 지정
+        setFrag(page); // 첫 프래그먼트 화면 지정
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        setContentView(R.layout.activity_main);
+
+
+        bottomNavigationView = findViewById(R.id.bottomNavi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+            {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.home:
+                        page = 0;
+                        setFrag(page);
+                        break;
+                    case R.id.message:
+                        page = 1;
+                        setFrag(page);
+                        break;
+                    case R.id.community:
+                        page = 2;
+                        setFrag(page);
+                        break;
+                    case R.id.mypage:
+                        page = 3;
+                        setFrag(page);
+                        break;
+
+                }
+                return true;
+            }
+        });
+
+        fraghome=new FragmentHome();
+        fragmsg=new FragmentMessage();
+        fragcom=new FragmentCommunity();
+        fragpag=new FragmentMypage();
+
+        setFrag(page); // 첫 프래그먼트 화면 지정
+         super.onRestart();
     }
 
     // 프레그먼트 교체

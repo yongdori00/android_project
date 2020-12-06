@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -78,7 +79,7 @@ public class Writing_Board extends AppCompatActivity {
         loadImage();
     }
 
-    public void loadImage(){
+    public void loadImage() {
         for (int i = 0; i < 10; i++) {
             imgView[i] = findViewById(id[i]);
         }
@@ -204,7 +205,7 @@ public class Writing_Board extends AppCompatActivity {
         uploadFile();
     }
 
-    public void storeBoard(){
+    public void storeBoard() {
         fa = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         docRef = db.collection("ChatApp").document("Post")
@@ -217,6 +218,10 @@ public class Writing_Board extends AppCompatActivity {
         user.put("title", titleS);
         user.put("sentence", sentenceS);
         user.put("uid", fa.getCurrentUser().getUid());
+        if (clipData == null)
+            user.put("imageNum", 0);
+        else
+            user.put("imageNum", clipData.getItemCount());
 
         numberOfGame++;
         Map<String, Object> num = new HashMap<>();
@@ -243,7 +248,7 @@ public class Writing_Board extends AppCompatActivity {
         putNumaccount();
     }
 
-    public void putNumaccount(){
+    public void putNumaccount() {
         Map<String, Object> Game = new HashMap<>();
         Map<String, Object> Theme = new HashMap<>();
 

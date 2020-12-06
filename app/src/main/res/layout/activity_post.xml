@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:lines="2"
             android:text="제목"
             android:textColor="#000000"
@@ -42,6 +43,7 @@
             android:text="top"
             android:visibility="gone" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,6 +67,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -74,87 +78,95 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="15dp"
-                        android:text="본문" />
+                        android:text="본문"
+                        android:textSize="20dp" />
                 </LinearLayout>
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/image1"
-                        android:visibility="gone"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image2"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image3"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image4"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image5"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image6"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image7"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image8"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image9"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/image10"
-                        android:layout_gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1" />
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/image1"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image2"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image3"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image4"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image5"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image6"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image7"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image8"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image9"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/image10"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:visibility="visible" />
+                    </LinearLayout>
+                </HorizontalScrollView>
             </LinearLayout>
+
         </ScrollView>
 
         <LinearLayout

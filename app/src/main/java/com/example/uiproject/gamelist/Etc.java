@@ -30,7 +30,6 @@ import java.util.Map;
 public class Etc extends Fragment implements View.OnClickListener{
 
     ImageView davinci, haligali;
-    CheckBox favorite;
 
     String valueTheme = "etc";
     String valueName;
@@ -47,7 +46,6 @@ public class Etc extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_etc, container, false);
 
         db = FirebaseFirestore.getInstance();
-        favorite = view.findViewById(R.id.favorite_check);
 
         davinci = view.findViewById(R.id.davinci);
         davinci.setOnClickListener(this);
@@ -78,7 +76,7 @@ public class Etc extends Fragment implements View.OnClickListener{
             public void run() {
                 startActivity(intent);
             }
-        }, 400);
+        }, 600);
     }
 
     public void getInfo(){

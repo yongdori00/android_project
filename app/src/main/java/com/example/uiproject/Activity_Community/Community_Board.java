@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.uiproject.Acivity_Main.MainActivity;
 import com.example.uiproject.Adapter.PostPreAdapter;
 import com.example.uiproject.CommunityHelper.board_list;
 import com.example.uiproject.R;
@@ -105,8 +106,6 @@ public class Community_Board extends AppCompatActivity {
 
         //}
 
-        con = this;
-
         TextView TV = findViewById(R.id.game_board);
         TV.setText(intentName);
 
@@ -118,29 +117,53 @@ public class Community_Board extends AppCompatActivity {
         favorite.setChecked(checked);
         favoriteChecked();
 
-        board_scroll = findViewById(R.id.board_scroll);
-        linearLayoutManager = new LinearLayoutManager(con);
-        board_scroll.setLayoutManager(linearLayoutManager);
         Initialize_by_game();
 
         simple = findViewById(R.id.community_swipelayout);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void run() {
-                simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            public void onRefresh() {
+                i = 0;
+                getAccountInfo();
+                populateDate();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
                     @Override
-                    public void onRefresh() {
-                        getAccountInfo();
-                        populateDate();
+                    public void run() {
                         Initialize_by_game();
-                        simple.setRefreshing(false);
                     }
-                });
+                }, 500);
+                simple.setRefreshing(false);
             }
-        },1000);
+        });
 
         //boardScroll();
+    }
+
+    @Override
+    protected void onRestart() {
+        getAccountInfo();
+        i = 0;
+        populateDate();
+        Initialize_by_game();
+        simple = findViewById(R.id.community_swipelayout);
+        simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                i = 0;
+                getAccountInfo();
+                populateDate();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Initialize_by_game();
+                    }
+                }, 500);
+                simple.setRefreshing(false);
+            }
+        });
+        super.onRestart();
     }
 
     @Override
@@ -156,11 +179,14 @@ public class Community_Board extends AppCompatActivity {
         editor.commit();
     }
 
-    private void Initialize_by_game(){
+    private void Initialize_by_game() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                board_scroll = findViewById(R.id.board_scroll);
+                linearLayoutManager = new LinearLayoutManager(Community_Board.this);
+                board_scroll.setLayoutManager(linearLayoutManager);
                 PostpreAdapter = new PostPreAdapter(rowsArrayList);
                 board_scroll.setAdapter(PostpreAdapter);
                 PostpreAdapter.setsOnItemClickListener(new PostPreAdapter.OnsItemClickListener() {
@@ -184,7 +210,7 @@ public class Community_Board extends AppCompatActivity {
                     }
                 });
             }
-        }, 400);
+        }, 1000);
     }
 
     private void populateDate() {
@@ -215,8 +241,8 @@ public class Community_Board extends AppCompatActivity {
                                     }
                                 }
                             }
-                        } catch (Exception e){
-
+                        } catch (Exception e) {
+                            Log.d("num", "갯수가 비어있습니다.");
                         }
 
                     }
@@ -351,6 +377,7 @@ public class Community_Board extends AppCompatActivity {
                 storeChecked(v);
             }
         });
+
     }
 
     public void storeChecked(View v) {

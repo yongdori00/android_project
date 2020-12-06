@@ -60,6 +60,8 @@ public class FragmentCommunity extends Fragment{
 
     Context con;
 
+    View view;
+
     public static FragmentCommunity newInstance() {
         return new FragmentCommunity();
     }
@@ -67,11 +69,10 @@ public class FragmentCommunity extends Fragment{
     public FragmentCommunity() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_community, container, false);
+        view = inflater.inflate(R.layout.fragment_community, container, false);
 
         FA = FirebaseAuth.getInstance();
         FU = FA.getCurrentUser();
@@ -83,12 +84,12 @@ public class FragmentCommunity extends Fragment{
             docRef = db.collection("ChatApp").document("account")
                     .collection("list").document(FU.getUid().trim());                     //로그인 안한채로 커뮤니티 탭 누르면 앱 튕김
 
-
             favoriteList = new HashMap<>();
 
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    int k = 0;
                     Iterator<String> keys;
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
@@ -102,6 +103,10 @@ public class FragmentCommunity extends Fragment{
                                 favoriteList = (Map<String, Object>) document.get("favorite");
                                 while (i < 6) {
                                     favoriteTheme = (Map<String, Object>) favoriteList.get(Theme[i]);
+                                    if(favoriteTheme == null) {
+                                        i++;
+                                        continue;
+                                    }
                                     keys = favoriteTheme.keySet().iterator();
                                     try {
                                         while (keys.hasNext()) {

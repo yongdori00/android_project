@@ -47,7 +47,7 @@ public class SplashActivity  extends AppCompatActivity {
         super.onPause();
         finish();
     }
-    public void favortie(){
+    public void favortie() {
         FirebaseUser FU = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef;
@@ -61,8 +61,10 @@ public class SplashActivity  extends AppCompatActivity {
                 Map<String, Object> favoriteList;
                 Map<String, Object> favoriteTheme;
                 String Theme[] = new String[]{"etc", "euro", "party", "strategy", "theme", "wargame"};
+
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    int k = 0;
                     Iterator<String> keys;
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
@@ -74,8 +76,12 @@ public class SplashActivity  extends AppCompatActivity {
                                 rowsArrayList[1] = new ArrayList<>();
 
                                 favoriteList = (Map<String, Object>) document.get("favorite");
-                                while(i < 6) {
+                                while (i < 6) {
                                     favoriteTheme = (Map<String, Object>) favoriteList.get(Theme[i]);
+                                    if (favoriteTheme == null) {
+                                        i++;
+                                        continue;
+                                    }
                                     keys = favoriteTheme.keySet().iterator();
                                     try {
                                         while (keys.hasNext()) {
@@ -85,12 +91,14 @@ public class SplashActivity  extends AppCompatActivity {
                                                 rowsArrayList[1].add(Theme[i]);
                                             }
                                         }
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
 
                                     }
                                     i++;
                                 }
+
                             } catch (Exception e) {
+
                             }
                         }
                     }

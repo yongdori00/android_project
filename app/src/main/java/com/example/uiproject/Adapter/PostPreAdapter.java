@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uiproject.Activity_Community.Community_Board;
+import com.example.uiproject.Activity_Community.Post;
 import com.example.uiproject.CommunityHelper.board_list;
 import com.example.uiproject.R;
 
@@ -54,7 +55,7 @@ public class PostPreAdapter extends RecyclerView.Adapter<PostPreAdapter.ViewHold
                     mListener.onsItemClick(v, getAdapterPosition());
                     TextView tv = v.findViewById(R.id.title_text);
 
-                    Community_Board.title_ = tv.getText().toString();
+                    Post.to = Integer.parseInt(textView2.getText().toString());
 
                     Log.d("test", "position = "+ getAdapterPosition());
                 }
